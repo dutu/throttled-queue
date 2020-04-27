@@ -1,6 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import RateLimiter from '@dutu/rate-limiter'
+import Debug from 'debug'
 import PriorityQueue from './priorityQueue.mjs'
+
+const dbg_exec = Debug('tq:exec')
 
 export default class ThrottledQueue extends EventEmitter {
   constructor({ rateLimiter, maxConcurrent = 1, minDelay = 0, timeout = 0 }) {
@@ -50,6 +53,7 @@ export default class ThrottledQueue extends EventEmitter {
 
           this.emit('execute', job.options.id)
           this._lastExecuted = Date.now()
+          dbg_exec(job.options.id)
           job.func()
             .then((result) => {
               if (job.timeoutId) clearTimeout(job.timeoutId)
