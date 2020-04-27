@@ -7,9 +7,6 @@
 ### Contents
 * [Changelog](#changelog)
 * [Installation](#installation)
-* [API](#api)
-* [Contributors](#contributors)
-* [License](#license)
 
 
 # Changelog
@@ -28,7 +25,7 @@ throttled-queue is using @dutu/rate-limiter
 
 ## Constructor
 
-```'js
+```js
 import { TokenBucketLimiter, RollingWindowLimiter } from '@dutu/rate-limiter'
 const rateLimiter = new TokenBucketLimiter({ bucketSize: 10, tokensPerInterval: 1, interval: 'sec'})
 const throttledQueue = new ThrottledQueue({ rateLimiter, maxConcurrent: 1, minDelay: 0, timeout: 0 })
@@ -50,9 +47,9 @@ const throttledQueue = new ThrottledQueue({ rateLimiter, maxConcurrent: 1, minDe
 Adds a job to the queue
 
 ```js
-throttledQueue.add({ id : 'id1', priority: 5, timeout: 0 }, async () => {
+throttledQueue.add({ id : 'someId', priority: 5, timeout: 0 }, async () => {
   // async function/promise
-  await new Promise(res => setTimeout(res, 5000))
+  await delay(5000)
 })
 ```
 
@@ -70,11 +67,12 @@ Clears the queue (deletes all queued jobs)
 throttledQueue.clear()
 ```
 
-###`getSize({ priority: 5 })`
+###`getSize()`
 Returns queue size (for specified priority)
 
 ```js
-throttledQueue.clear()
+throttledQueue.getSize()
+throttledQueue.getSize({ priority: 5 })
 ```
 
 ## Events
