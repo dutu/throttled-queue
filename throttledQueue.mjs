@@ -37,7 +37,7 @@ export default class ThrottledQueue extends EventEmitter {
         if (this._limiter.tryRemoveTokens(1)) {
           this._running += 1
           const job = this._priorityQueue.dequeue()
-          const options = Object.assign({}, job.options, this._options)
+          const options = Object.assign({}, this._options, job.options)
           if (options.timeout) {
             job.timeoutId = setTimeout(() => {
               const reject = job.reject
