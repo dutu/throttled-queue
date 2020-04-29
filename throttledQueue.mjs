@@ -85,9 +85,19 @@ export default class ThrottledQueue extends EventEmitter {
     }
   }
 
-  async add({ id, priority = 5, timeout = 0 } = {}, func) {
+  async add({ id, priority = 5, timeout } = {}, func) {
     return new Promise((resolve, reject) => {
-      const newJob = { options : { id, timeout }, func, resolve, reject }
+      const newJob = {
+        options : { id },
+        func,
+        resolve,
+        reject
+      }
+
+      if (timeout) {
+        this.options.timeout = timeout
+      }
+
       this._priorityQueue.enqueue(newJob, priority)
       if (this._priorityQueue.size === 1) {
         this.next()
