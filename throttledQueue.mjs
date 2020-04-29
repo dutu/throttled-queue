@@ -95,7 +95,7 @@ export default class ThrottledQueue extends EventEmitter {
       }
 
       if (timeout) {
-        this.options.timeout = timeout
+        newJob.options.timeout = timeout
       }
 
       this._priorityQueue.enqueue(newJob, priority)
