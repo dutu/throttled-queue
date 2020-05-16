@@ -12,6 +12,7 @@ export default class ThrottledQueue extends EventEmitter {
       throw new Error('rateLimiter must be instanceof RateLimiter')
     }
 
+    this._pauseUntil = 0
     this._running = 0
     this._options = {
       maxConcurrent,
@@ -19,6 +20,8 @@ export default class ThrottledQueue extends EventEmitter {
       timeout,
     }
 
+
+    this._timeoutId = null
     this._limiter = rateLimiter
     this._lastExecuted = 0
     this._priorityQueue = new PriorityQueue()
@@ -27,8 +30,20 @@ export default class ThrottledQueue extends EventEmitter {
   }
 
   async next() {
+    if (this._pauseUntil === null) {
+      clearTimeout(this._timeoutId)
+      return
+    }
+
+    if (this._pauseUntil > 0) {
+      clearTimeout(this._timeoutId)
+      this._timeoutId = setTimeout(this.start.bind(this), Math.max(0, this._pauseUntil - Date.now()))
+      return
+    }
+
     if (this._options.minDelay && this._lastExecuted && (Date.now() - this._lastExecuted < this._options.minDelay)) {
-      setTimeout(() => this.next(), Date.now() - this._lastExecuted - this._options.minDelay)
+      clearTimeout(this._timeoutId)
+      this._timeoutId = setTimeout(this.next.bind(this), Date.now() - this._lastExecuted - this._options.minDelay)
       return
     }
 
@@ -79,7 +94,8 @@ export default class ThrottledQueue extends EventEmitter {
           this.next()
         } else {
           const delayMS = this._limiter.getDelayForTokens(1)
-          setTimeout(this.next.bind(this), delayMS)
+          clearTimeout(this._timeoutId)
+          this._timeoutId = setTimeout(this.next.bind(this), delayMS)
         }
       }
     }
@@ -103,6 +119,20 @@ export default class ThrottledQueue extends EventEmitter {
         this.next()
       }
     })
+  }
+
+  pause(durationMs) {
+    if (durationMs === null) {
+      this._pauseUntil = null
+    } else {
+      this._pauseUntil = Date.now() + durationMs
+    }
+  }
+
+  start() {
+    this._pauseUntil = 0
+    clearTimeout(this._timeoutId)
+    this._timeoutId = setTimeout(this.next.bind(this), 0)
   }
 
   getSize(priority = undefined) {

@@ -11,7 +11,8 @@
 
 # Changelog
 
-See detailed [Changelog](CHANGELOG.md)
+#### 1.2.0
+* added methods `pause` and `start`
 
 # Installation
 
@@ -59,6 +60,23 @@ throttledQueue.add({ id : 'someId', priority: 5, timeout: 0 }, async () => {
 | `priority` | `5`     | Number from 0 to 9. Jobs with lower priority will always be executed first |
 | `timeout`  | `0`     | The number of milliseconds a job is given to complete. Jobs that execute for longer than `timeout` ms will be failed with an error |
 
+
+###`pause(durationMs)`
+Pauses job execution for specified number of milliseconds.
+If `null` is passed, job execution is paused indefinitely.
+
+```js
+throttledQueue.pause(500)
+throttledQueue.getSize(null)
+```
+
+###`start()`
+Starts job execution (if it was paused with `pause()`)
+
+
+```js
+throttledQueue.start()
+```
 
 ###`clear()`
 Clears the queue (deletes all queued jobs)
