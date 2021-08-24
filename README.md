@@ -58,7 +58,7 @@ throttledQueue.add({ id : 'someId', priority: 5, timeout: 0 }, async () => {
 |------------|---------|-------------|
 | `id`       |         | Job Id |
 | `priority` | `5`     | Number from 0 to 9. Jobs with lower priority will always be executed first |
-| `timeout`  | `0`     | The number of milliseconds a job is given to complete. Jobs that execute for longer than `timeout` ms will be failed with an error |
+| `timeout`  | `0`     | The number of milliseconds a job is given to complete. Jobs that execute for longer than `timeout` ms will be failed with an error. `0` means no timeout. |
 
 
 ### `pause(durationMs)`
@@ -67,7 +67,7 @@ If `null` is passed, job execution is paused indefinitely.
 
 ```js
 throttledQueue.pause(500)
-throttledQueue.getSize(null)
+throttledQueue.pause(null)
 ```
 
 ### `start()`
