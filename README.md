@@ -22,7 +22,7 @@ npm install --save "git+https://github.com/dutu/throttled-queue.git"
 
 # Usage
 
-throttled-queue is using @dutu/rate-limiter 
+throttled-queue is using [@dutu/rate-limiter](https://github.com/dutu/rate-limiter)
 
 ## Constructor
 
