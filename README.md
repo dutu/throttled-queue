@@ -22,7 +22,7 @@ npm install --save "git+https://github.com/dutu/throttled-queue.git"
 
 # Usage
 
-throttled-queue is using @dutu/rate-limiter 
+throttled-queue is using [@dutu/rate-limiter](https://github.com/dutu/rate-limiter)
 
 ## Constructor
 
@@ -43,7 +43,7 @@ const throttledQueue = new ThrottledQueue({ rateLimiter, maxConcurrent: 1, minDe
 
 ### Methods
 
-###`add()`
+### `add()`
 
 Adds a job to the queue
 
@@ -58,19 +58,19 @@ throttledQueue.add({ id : 'someId', priority: 5, timeout: 0 }, async () => {
 |------------|---------|-------------|
 | `id`       |         | Job Id |
 | `priority` | `5`     | Number from 0 to 9. Jobs with lower priority will always be executed first |
-| `timeout`  | `0`     | The number of milliseconds a job is given to complete. Jobs that execute for longer than `timeout` ms will be failed with an error |
+| `timeout`  | `0`     | The number of milliseconds a job is given to complete. Jobs that execute for longer than `timeout` ms will be failed with an error. `0` means no timeout. |
 
 
-###`pause(durationMs)`
+### `pause(durationMs)`
 Pauses job execution for specified number of milliseconds.
 If `null` is passed, job execution is paused indefinitely.
 
 ```js
 throttledQueue.pause(500)
-throttledQueue.getSize(null)
+throttledQueue.pause(null)
 ```
 
-###`start()`
+### `start()`
 Starts job execution (if it was paused with `pause()`)
 
 
@@ -78,14 +78,14 @@ Starts job execution (if it was paused with `pause()`)
 throttledQueue.start()
 ```
 
-###`clear()`
+### `clear()`
 Clears the queue (deletes all queued jobs)
 
 ```js
 throttledQueue.clear()
 ```
 
-###`getSize()`
+### `getSize()`
 Returns queue size (for specified priority)
 
 ```js
