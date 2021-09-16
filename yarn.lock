@@ -6,6 +6,10 @@
   version "1.1.4"
   resolved "git+ssh://git@github.com/dutu/rate-limiter.git#897c283367ca893c84d2184d2a663a964a7fffea"
 
+"@dutu/rate-limiter@git+https://github.com/dutu/rate-limiter#v1.1.5":
+  version "1.1.5"
+  resolved "git+https://github.com/dutu/rate-limiter#360363f54fa1c1162ec2f39f63fd5a340b8ba6b1"
+
 "@ungap/promise-all-settled@1.1.2":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz"

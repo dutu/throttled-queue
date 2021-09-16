@@ -1,6 +1,6 @@
 {
   "name": "@dutu/throttled-queue",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "throttled promise queue",
   "main": "index.mjs",
   "module": "./index.mjs",
@@ -19,7 +19,7 @@
   "author": "dutu <dutu@protonmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@dutu/rate-limiter": "git+https://github.com/dutu/rate-limiter#v1.1.4",
+    "@dutu/rate-limiter": "git+https://github.com/dutu/rate-limiter#v1.1.5",
     "debug": "^4.2.0",
     "eventemitter3": "^4.0.7",
     "yarn": "^1.22.11"
