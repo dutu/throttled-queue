@@ -1,10 +1,11 @@
-import { TokenBucketLimiter, RollingWindowLimiter } from '@dutu/rate-limiter'
-import ThrottledQueue from '../index.mjs'
 import Debug from 'debug'
 import Performance from 'perf_hooks'
 import chai from 'chai'
-const expect = chai.expect
 
+import { TokenBucketLimiter, RollingWindowLimiter } from '@dutu/rate-limiter'
+import ThrottledQueue from '../src/throttledQueue'
+
+const expect = chai.expect
 const performance = Performance.performance
 
 const dbg_work = Debug('test:work')
