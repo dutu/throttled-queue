@@ -1,4 +1,4 @@
-const EventEmitter = require('eventemitter3')
+import EventEmitter from 'eventemitter3'
 
 export class PriorityQueue extends EventEmitter {
   constructor() {
