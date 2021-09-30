@@ -1,14 +1,14 @@
 import EventEmitter from 'eventemitter3'
 import Debug from 'debug'
-import RateLimiter from '@dutu/rate-limiter'
-import PriorityQueue from './priorityQueue'
+import { RollingWindowLimiter, FixedWindowLimiter, TokenBucketLimiter } from '@dutu/rate-limiter'
+import { PriorityQueue } from './priorityQueue.js'
 
 const dbg_exec = Debug('tq:exec')
 
 export default class ThrottledQueue extends EventEmitter {
   constructor({ rateLimiter, maxConcurrent = 1, minDelay = 0, timeout = 0 }) {
     super()
-    if (!(rateLimiter instanceof RateLimiter)) {
+    if (!(rateLimiter instanceof RollingWindowLimiter || rateLimiter instanceof FixedWindowLimiter || rateLimiter instanceof TokenBucketLimiter)) {
       throw new Error('rateLimiter must be instanceof RateLimiter')
     }
 

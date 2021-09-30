@@ -1,6 +1,6 @@
-import EventEmitter from 'eventemitter3'
+const EventEmitter = require('eventemitter3')
 
-export default class PriorityQueue extends EventEmitter {
+export class PriorityQueue extends EventEmitter {
   constructor() {
     super()
     this._queue = []
@@ -14,7 +14,7 @@ export default class PriorityQueue extends EventEmitter {
     this.emit('enqueue', element, priority)
   }
 
-  dequeue(priority= undefined) {
+  dequeue(priority) {
     if (priority) {
       const element = this._queue[priority].shift()
       if (element !== undefined) {
@@ -35,7 +35,7 @@ export default class PriorityQueue extends EventEmitter {
     return undefined
   }
 
-  getSize(priority= undefined) {
+  getSize(priority) {
     if (priority) {
       return this._queue[priority].length
     }

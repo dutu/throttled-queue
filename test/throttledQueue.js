@@ -3,7 +3,7 @@ import Performance from 'perf_hooks'
 import chai from 'chai'
 
 import { TokenBucketLimiter, RollingWindowLimiter } from '@dutu/rate-limiter'
-import ThrottledQueue from '../src/throttledQueue'
+import ThrottledQueue from '../src/throttledQueue.mjs'
 
 const expect = chai.expect
 const performance = Performance.performance

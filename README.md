@@ -14,11 +14,24 @@
 #### 1.2.0
 * added methods `pause` and `start`
 
+#### 1.3.1
+* added support to `require` the module as CommonJS module. See note below for required dependencies to be installed as well  
+
 # Installation
 
 ```
 npm install --save "git+https://github.com/dutu/throttled-queue.git"
 ```
+> Note: when not using ES6 you should install the two packages below (which will emulate ES environment)
+>```
+>npm install --save core-js
+>npm install --save regenerator-runtime 
+>```
+>and use the following at the top of your main js file:
+>```js
+>require("core-js/stable")
+>require("regenerator-runtime/runtime")
+>```
 
 # Usage
 

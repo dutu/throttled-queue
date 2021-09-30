@@ -1,7 +1,7 @@
 const chai = require('chai')
 const { TokenBucketLimiter } = require('@dutu/rate-limiter')
 const ThrottledQueue = require('../dist/throttledQueue')
-const PriorityQueue = require('../dist/priorityQueue')
+const PriorityQueue = require('../dist/priorityQueue').PriorityQueue
 
 const expect = chai.expect
 

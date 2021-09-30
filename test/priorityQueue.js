@@ -1,7 +1,7 @@
 import chai from 'chai'
 const expect = chai.expect
 
-import PriorityQueue from '../src/priorityQueue'
+import { PriorityQueue } from '../src/priorityQueue.js'
 
 describe("Constructor", function () {
   it('should create a new instance', function () {
